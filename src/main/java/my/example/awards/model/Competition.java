@@ -32,6 +32,19 @@ public class Competition {
     @JoinColumn(name = "second_player_id")
     private Player secondPlayer;
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "id = " + id + ", " +
+                "title = " + title + ", " +
+                "competitionLevel = " + competitionLevel + ")"
+//                "location = " + location + ", " +
+//                "referee = " + referee + ", " +
+//                "firstPlayer = " + firstPlayer + ", " +
+//                "secondPlayer = " + secondPlayer + ")"
+                ;
+    }
+
     public Location getLocation() {
         return location;
     }

@@ -2,7 +2,6 @@ package my.example.awards.endpoints;
 
 import my.example.awards.model.Award;
 import my.example.awards.repo.AwardRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,9 +11,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/awards")
 public class AwardsEndpoints {
+    private final AwardRepository awardRepository;
 
-    @Autowired
-    AwardRepository awardRepository;
+    public AwardsEndpoints(AwardRepository awardRepository) {
+        this.awardRepository = awardRepository;
+    }
 
     @GetMapping(value = "/", produces = "text/html")
     String getLinks(){
@@ -22,7 +23,7 @@ public class AwardsEndpoints {
                 "<a href=\"all\">all</a></br>" +
                 "<a href=\"high-rating\">high-rating</a></br>" +
                 "<a href=\"2022\">2022</a></br>";
-            }
+    }
 
 
     @GetMapping(value = "all", produces = "text/plain")

@@ -39,4 +39,12 @@ public class License {
     public void setLicenseInfo(LicenseInfo licenseInfo) {
         this.licenseInfo = licenseInfo;
     }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "licenseNumber = " + licenseNumber + ", " +
+                "licenseInfo = " + licenseInfo + ")";
+    }
+
 }

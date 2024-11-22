@@ -3,7 +3,11 @@ package my.example.awards.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @MappedSuperclass
 public class Person {
     @Id
@@ -12,21 +16,5 @@ public class Person {
 
     @Column(name = "first_name")
     private String fullName;
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String firstName) {
-        this.fullName = firstName;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
 }

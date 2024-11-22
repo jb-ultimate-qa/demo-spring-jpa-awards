@@ -12,5 +12,4 @@ public interface AwardRepository extends JpaRepository<Award, Integer> {
   @Query("select a from Award a where a.year = ?1")
   List<Award> findByYear(Short year);
 
-
 }

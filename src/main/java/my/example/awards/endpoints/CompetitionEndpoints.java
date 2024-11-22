@@ -1,5 +1,6 @@
 package my.example.awards.endpoints;
 
+import lombok.AllArgsConstructor;
 import my.example.awards.model.Competition;
 import my.example.awards.repo.CompetitionRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,15 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/comp")
 public class CompetitionEndpoints {
 
     private final CompetitionRepository competitionRepository;
-
-    public CompetitionEndpoints(CompetitionRepository competitionRepository) {
-        this.competitionRepository = competitionRepository;
-    }
 
     @GetMapping(value = "/", produces = "text/html")
     String getLinks(){

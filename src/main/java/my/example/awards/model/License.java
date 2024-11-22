@@ -1,7 +1,11 @@
 package my.example.awards.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "license")
 public class License {
@@ -15,30 +19,6 @@ public class License {
 
     @Embedded
     private LicenseInfo licenseInfo;
-
-    public String getLicenseNumber() {
-        return licenseNumber;
-    }
-
-    public void setLicenseNumber(String licenseNumber) {
-        this.licenseNumber = licenseNumber;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LicenseInfo getLicenseInfo() {
-        return licenseInfo;
-    }
-
-    public void setLicenseInfo(LicenseInfo licenseInfo) {
-        this.licenseInfo = licenseInfo;
-    }
 
     @Override
     public String toString() {

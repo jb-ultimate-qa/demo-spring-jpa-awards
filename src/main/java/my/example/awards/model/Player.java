@@ -4,7 +4,11 @@ import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "player")
 public class Player extends Person {
@@ -20,27 +24,4 @@ public class Player extends Person {
             inverseJoinColumns = @JoinColumn(name = "sport_school_id"))
     private Set<SportSchool> sportSchools = new LinkedHashSet<>();
 
-    public Set<SportSchool> getSportSchools() {
-        return sportSchools;
-    }
-
-    public void setSportSchools(Set<SportSchool> sportSchools) {
-        this.sportSchools = sportSchools;
-    }
-
-    public Set<Award> getAwards() {
-        return awards;
-    }
-
-    public void setAwards(Set<Award> awards) {
-        this.awards = awards;
-    }
-
-    public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
 }

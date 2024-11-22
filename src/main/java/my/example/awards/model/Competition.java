@@ -1,8 +1,11 @@
 package my.example.awards.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-@Entity
+@Getter
+@Setter@Entity
 @Table(name = "competition")
 public class Competition {
     @Id
@@ -43,62 +46,6 @@ public class Competition {
 //                "firstPlayer = " + firstPlayer + ", " +
 //                "secondPlayer = " + secondPlayer + ")"
                 ;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Player getSecondPlayer() {
-        return secondPlayer;
-    }
-
-    public void setSecondPlayer(Player secondPlayer) {
-        this.secondPlayer = secondPlayer;
-    }
-
-    public Player getFirstPlayer() {
-        return firstPlayer;
-    }
-
-    public void setFirstPlayer(Player firstPlayer) {
-        this.firstPlayer = firstPlayer;
-    }
-
-    public Referee getReferee() {
-        return referee;
-    }
-
-    public void setReferee(Referee referee) {
-        this.referee = referee;
-    }
-
-    public CompetitionLevel getCompetitionLevel() {
-        return competitionLevel;
-    }
-
-    public void setCompetitionLevel(CompetitionLevel competitionLevel) {
-        this.competitionLevel = competitionLevel;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
 }

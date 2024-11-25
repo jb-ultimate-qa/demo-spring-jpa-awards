@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-@Setter@Entity
+@Setter
+@Entity
 @Table(name = "competition")
 public class Competition {
     @Id

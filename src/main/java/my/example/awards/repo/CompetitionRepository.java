@@ -4,10 +4,12 @@ import my.example.awards.model.Competition;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import my.example.awards.model.CompetitionLevel;
+import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 import java.util.List;
 
+@Repository
 public interface CompetitionRepository extends JpaRepository<Competition, Long> {
 
     @Query("select c from Competition c where " +

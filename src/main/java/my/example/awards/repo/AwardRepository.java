@@ -3,9 +3,11 @@ package my.example.awards.repo;
 import my.example.awards.model.Award;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface AwardRepository extends JpaRepository<Award, Integer> {
   List<Award> findByWinner_RatingGreaterThan(Integer rating);
 

@@ -61,6 +61,12 @@ CREATE TABLE sport_school
     CONSTRAINT pk_sport_school PRIMARY KEY (id)
 );
 
+CREATE TABLE sport_school_rating
+(
+    school_id VARCHAR(255) NOT NULL,
+    rating    INTEGER NOT NULL
+);
+
 ALTER TABLE referee
     ADD CONSTRAINT uc_referee_license UNIQUE (license_id);
 
@@ -84,3 +90,6 @@ ALTER TABLE player_sport_school
 
 ALTER TABLE player_sport_school
     ADD CONSTRAINT fk_plasposch_on_sport_school FOREIGN KEY (sport_school_id) REFERENCES sport_school (id);
+
+ALTER TABLE sport_school_rating
+    ADD CONSTRAINT fk_sport_school_rating_on_sport_school FOREIGN KEY (school_id) REFERENCES sport_school (id);

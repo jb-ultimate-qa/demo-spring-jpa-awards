@@ -84,6 +84,11 @@ create table sport_school (
     primary key (id)
 );
 
+CREATE TABLE sport_school_rating(
+    school_id varchar(255) not null,
+    rating integer not null
+);
+
 alter table if exists award
     add constraint FK7p0urodh5nikt550flbqsk5mf
     foreign key (winner_id)
@@ -118,3 +123,8 @@ alter table if exists referee
     add constraint FKjtcthd6tb5fu26kvn6d7pf2o3
     foreign key (license_id)
     references license;
+
+alter table if exists sport_school_rating
+    add constraint fk_sport_school_rating_on_sport_school
+    foreign key (school_id)
+    references sport_school (id);

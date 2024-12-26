@@ -68,3 +68,21 @@ INSERT INTO award (id, winner_id, year_, title) VALUES
     (8, 8, 2022, 'Best Defensive Player'),
     (9, 9, 2024, 'Best Offense Award'),
     (10, 10, 2023, 'Most Valuable Player');
+
+-- Insert data into sport_school table
+INSERT INTO sport_school_rating (school_id, rating) VALUES
+     ('SS001', 3),
+     ('SS001', 4),
+     ('SS001', 4),
+     ('SS001', 4),
+     ('SS002', 5),
+     ('SS002', 5),
+     ('SS002', 4),
+     ('SS002', 5),
+     ('SS003', 2),
+     ('SS003', 3),
+     ('SS003', 2),
+     ('SS004', 4),
+     ('SS004', 3),
+     ('SS004', 4),
+     ('SS005', 5);

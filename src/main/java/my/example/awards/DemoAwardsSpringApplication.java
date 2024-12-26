@@ -15,8 +15,8 @@ public class DemoAwardsSpringApplication {
         SpringApplication.run(DemoAwardsSpringApplication.class, args);
 
         printURLs();
-        useComponent();
-        useService();
+//        useComponent();
+//        useService();
     }
 
     public static void printURLs(){

@@ -28,15 +28,25 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.flywaydb:flyway-database-postgresql'
     implementation 'org.liquibase:liquibase-core'
+    implementation 'org.flywaydb:flyway-mysql'
+    implementation 'org.flywaydb:flyway-sqlserver'
+    implementation 'org.flywaydb:flyway-database-oracle'
 //    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql'
 //    annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+    runtimeOnly 'org.hsqldb:hsqldb'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

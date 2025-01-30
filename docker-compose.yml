@@ -22,7 +22,7 @@ services:
     command: >
       bash -c "su - db2inst1 -c 'db2start && sleep 20 && db2 -tvf /docker-entrypoint-initdb.d/init2.sql'"
   mssql_2019:
-    # jdbc:sqlserver://localhost:1434;databaseName=testdb;user=tester;password=My@Super@Secret
+    # jdbc:sqlserver://localhost:1434;databaseName=demo_db;encrypt=false;trustServerCertificate=true
     container_name: mssql_2019
     privileged: true
     image: datagrip/mssql-server-linux:2019

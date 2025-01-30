@@ -1,0 +1,36 @@
+services:
+  db2:
+    # jdbc:db2://localhost:50000/guest:user=db2inst1;password=root_pass;
+#    image: datagrip/db2
+    image: ibmcom/db2:11.5.7.0
+    container_name: ibm_db2_11.5
+    privileged: true
+    restart: always
+    ports:
+      - "50000:50000"
+    environment:
+      LICENSE: accept
+      DB2INST1_PASSWORD: root_pass
+      DBNAME: demo
+      DB2COMM: TCPIP
+      PERSISTENT_HOME: false  # Avoids permission issues on restar
+    volumes:
+      - db2_data:/database
+      - ./src/main/resources/dbs/db2/init-db2.sql:/docker-entrypoint-initdb.d/init2.sql
+    profiles:
+      - db2
+    command: >
+      bash -c "su - db2inst1 -c 'db2start && sleep 20 && db2 -tvf /docker-entrypoint-initdb.d/init2.sql'"
+#  postgres:
+#    image: postgres:17.0
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      - POSTGRES_PASSWORD=demo
+#      - POSTGRES_USER=posrgres
+#      - POSTGRES_DB=posrgres
+#    profiles:
+#      - postgresdocker'
+
+volumes:
+  db2_data:

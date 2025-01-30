@@ -46,6 +46,7 @@ dependencies {
     runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
     runtimeOnly 'org.hsqldb:hsqldb'
     runtimeOnly 'com.mysql:mysql-connector-j'
+    runtimeOnly 'com.ibm.db2:jcc'
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

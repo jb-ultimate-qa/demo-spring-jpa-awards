@@ -21,6 +21,30 @@ services:
       - db2
     command: >
       bash -c "su - db2inst1 -c 'db2start && sleep 20 && db2 -tvf /docker-entrypoint-initdb.d/init2.sql'"
+  mssql_2019:
+    # jdbc:sqlserver://localhost:1434;databaseName=testdb;user=tester;password=My@Super@Secret
+    container_name: mssql_2019
+    privileged: true
+    image: datagrip/mssql-server-linux:2019
+    hostname: mssql_2019
+    ports:
+      - "1434:1433"
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: 123_root_pass_123
+      MSSQL_DB: demo_db
+      MSSQL_PID: Developer
+      MSSQL_AGENT_ENABLED: true
+      MSSQL_USER: demo_user
+      MSSQL_PASSWORD: demo_pass
+    mem_limit: 4g
+    healthcheck:
+      test: grep "Starting up database '${MSSQL_DB}'." /var/opt/mssql/log/errorlog || exit 1
+      interval: 3m
+      timeout: 10s
+      retries: 5
+    profiles:
+      - mssql
 #  postgres:
 #    image: postgres:17.0
 #    ports:

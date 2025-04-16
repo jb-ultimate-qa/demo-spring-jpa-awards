@@ -1,29 +1,44 @@
 package my.example.awards;
 
-import my.example.awards.repo.MyComponent;
-import my.example.awards.repo.MyService;
+import my.example.awards.components.LicenseTransactionalService;
+import my.example.awards.components.MyComponent;
+import my.example.awards.components.MyService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class DemoAwardsSpringApplication {
+public class DemoAwardsSpringApplication implements CommandLineRunner {
+
+    private final LicenseTransactionalService licenseService;
+
+    @Autowired
+    public DemoAwardsSpringApplication(LicenseTransactionalService licenseService){
+        this.licenseService = licenseService;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(DemoAwardsSpringApplication.class, args);
 
         printURLs();
-        useComponent();
-        useService();
+//        useComponent();
+//        useService();
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        licenseService.checkEntityStates();
     }
 
     public static void printURLs(){
-        System.out.println("Go to http://localhost:8080/hello/\n" +
-                "http://localhost:8080/awards/\n" +
-                "http://localhost:8080/comp/\n" +
-                "http://localhost:8080/schools/all");
+        System.out.println("""
+                Go to http://localhost:8080/hello/
+                http://localhost:8080/awards/
+                http://localhost:8080/comp/
+                http://localhost:8080/schools/all
+                http://localhost:8080/license/transactions""");
     }
 
     public static void useComponent(){
@@ -52,13 +67,6 @@ public class DemoAwardsSpringApplication {
 
         // Closing the context
         context.close();
-    }
-
-    @Bean
-    CommandLineRunner runner() {
-        return args -> {
-
-        };
     }
 
 }

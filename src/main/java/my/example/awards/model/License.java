@@ -20,6 +20,12 @@ public class License {
     @Embedded
     private LicenseInfo licenseInfo;
 
+    public License(String testLicenseNumber) {
+        this.licenseNumber = testLicenseNumber;
+    }
+
+    public License() { }
+
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +

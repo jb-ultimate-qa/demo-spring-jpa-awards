@@ -1,4 +1,4 @@
-package my.example.awards.repo;
+package my.example.awards.components;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

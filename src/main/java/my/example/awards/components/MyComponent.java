@@ -1,4 +1,4 @@
-package my.example.awards.repo;
+package my.example.awards.components;
 
 import org.springframework.stereotype.Component;
 

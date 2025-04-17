@@ -25,7 +25,7 @@ public class LicenseEndpoints {
 
     @GetMapping(value = "transactions", produces = "text/plain")
     void testTransactions(){
-        licenseService.checkEntityStates();
+        licenseService.checkEntityStatesFlow();
     }
 
 }

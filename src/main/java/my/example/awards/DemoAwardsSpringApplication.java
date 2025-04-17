@@ -29,7 +29,7 @@ public class DemoAwardsSpringApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        licenseService.checkEntityStates();
+        licenseService.checkEntityStatesFlow();
     }
 
     public static void printURLs(){

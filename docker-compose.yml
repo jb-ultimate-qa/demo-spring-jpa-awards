@@ -10,7 +10,7 @@ services:
       - "50000:50000"
     environment:
       LICENSE: accept
-      DB2INST1_PASSWORD: root_pass
+      DB2INST1_PASSWORD: root_pass1
       DBNAME: demo
       DB2COMM: TCPIP
       PERSISTENT_HOME: false  # Avoids permission issues on restar

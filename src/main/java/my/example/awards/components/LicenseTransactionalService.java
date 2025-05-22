@@ -9,6 +9,7 @@ import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.engine.spi.Status;
 import org.hibernate.engine.spi.PersistenceContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
@@ -18,6 +19,7 @@ public class LicenseTransactionalService {
 
     @jakarta.persistence.PersistenceContext
     EntityManager entityManager;
+    HelperService helper;
 
     @Transactional()
     public void checkEntityStatesFlow1() {
@@ -59,9 +61,8 @@ public class LicenseTransactionalService {
         System.out.println("Transaction complete");
     }
 
-
     @Transactional()
-    public void checkEntityStatesFlow() {
+    public void checkEntityStatesFlow2() {
         System.out.println("\nTransaction begin");
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
 
@@ -80,7 +81,19 @@ public class LicenseTransactionalService {
         System.out.println("Transaction complete");
     }
 
-    private void printLicenseEntityState(PersistenceContext context, Session session, License license, String actionDescription) {
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void checkEntityStatesFlow() {
+        Session hibernateSession = entityManager.unwrap(Session.class);
+        var session = entityManager.unwrap(SessionImplementor.class);
+        PersistenceContext context = session.getPersistenceContext();
+        License license = new License("TestLicenseNumber");
+        entityManager.persist(license);
+        helper.printLicenseEntityState2(context, hibernateSession, license, "after persist");
+        entityManager.clear();
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    protected void printLicenseEntityState(PersistenceContext context, Session session, License license, String actionDescription) {
         int entityCount = session.getStatistics().getEntityCount();
         try {
             Status entityState = context.getEntry(license).getStatus();

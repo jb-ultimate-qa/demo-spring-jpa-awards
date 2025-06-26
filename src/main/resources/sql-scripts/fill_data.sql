@@ -7,7 +7,7 @@ INSERT INTO sport_school (id, title) VALUES
      ('SS005', 'Victory School of Sports');
 
 -- Insert data into license table
-INSERT INTO license (sn, descr, license_number) VALUES
+INSERT INTO license (serial_num, descr, license_num) VALUES
     (101, 'National Referee License', 'LR001'),
     (102, 'International Referee License', 'LR002'),
     (103, 'Regional Referee License', 'LR003'),
@@ -15,7 +15,7 @@ INSERT INTO license (sn, descr, license_number) VALUES
     (105, 'State Referee License', 'LR005');
 
 -- Insert data into player table
-INSERT INTO player (id, rating, first_name) VALUES
+INSERT INTO player (id, rating, full_name) VALUES
     (1, 1200, 'John'),
     (2, 1100, 'Alice'),
     (3, 1250, 'Bob'),
@@ -28,7 +28,7 @@ INSERT INTO player (id, rating, first_name) VALUES
     (10, 1100, 'Ivy');
 
 -- Insert data into referee table
-INSERT INTO referee (id, license_id, first_name) VALUES
+INSERT INTO referee (id, license_id, full_name) VALUES
      (1, 1, 'Mike'),
      (2, 2, 'Nancy'),
      (3, 3, 'Oscar'),
@@ -57,7 +57,7 @@ INSERT INTO competition (competition_level, first_player_id, referee_id, second_
     (0, 9, 5, 10, 1005, 'London', 'Wembley Stadium', 'Local Showdown');
 
 -- Insert data into award table
-INSERT INTO award (id, winner_id, year_, title) VALUES
+INSERT INTO award (id, winner_id, award_year, award_title) VALUES
     (1, 1, 2024, 'Best Player of the Year'),
     (2, 2, 2024, 'Top Scorer Award'),
     (3, 3, 2023, 'Most Improved Player'),

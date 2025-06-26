@@ -2,21 +2,22 @@ package my.example.awards.model;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "award")
+@Entity(name = "AwardLogical")
+@Table(name = "Award", indexes = {@Index(name = "winnerIdIdx", columnList = "winner_id")})
+@NamedQuery(name = "Award.findByWinnerFullNameLike", query = "select a from AwardLogical a where a.winner.fullName like :fullName")
 public class Award {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "year_", nullable = false)
+    @Column(name = "awardYear", nullable = false)
     private Short year;
 
-    @Column(name = "title", nullable = false)
+    @Column(name = "awardTitle", nullable = false)
     private String title;
 
     @ManyToOne
-    @JoinColumn(name = "winner_id")
+    @JoinColumn(name = "winnerId")
     private Player winner;
 
     public Player getWinner() {

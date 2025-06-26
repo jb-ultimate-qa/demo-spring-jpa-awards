@@ -1,3 +1,11 @@
+### Info about branch:
+
+For naming strategy testing
+
+---
+
+### Info about project:
+
 Spring Data JPA
 
 Liquibase and Flyway

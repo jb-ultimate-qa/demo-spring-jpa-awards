@@ -44,4 +44,16 @@ public class AwardsEndpoints {
         return QueryResultPrettier.concatenateObjects(awardsList);
     }
 
+    @GetMapping(value = "test-java-names", produces = "text/plain")
+    String getAwardsJ(){
+        List<Award> awardsList = awardRepository.findByYearJava();
+        return QueryResultPrettier.concatenateObjects(awardsList);
+    }
+
+    @GetMapping(value = "test-named-query1", produces = "text/plain")
+    String getAwardsNQ1(){
+        List<Award> awardsList = awardRepository.findByWinnerFullNameLike("David");
+        return QueryResultPrettier.concatenateObjects(awardsList);
+    }
+
 }

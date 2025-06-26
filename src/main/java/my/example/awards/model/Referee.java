@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 @Table(name = "referee")
 public class Referee extends Person {
     @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "license_id")
+    @JoinColumn(name = "licenseId")
     private License license;
 
     public License getLicense() {

@@ -6,7 +6,8 @@ import jakarta.persistence.*;
 @Table(name = "competition")
 public class Competition {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CompGen")
+    @SequenceGenerator(name = "CompGen", sequenceName = "CompetitionIdSeq", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -14,22 +15,22 @@ public class Competition {
     private String title;
 
     @Enumerated
-    @Column(name = "competition_level")
+    @Column(name = "competitionLevel")
     private CompetitionLevel competitionLevel;
 
     @Embedded
     private Location location;
 
     @ManyToOne
-    @JoinColumn(name = "referee_id")
+    @JoinColumn(name = "refereeId")
     private Referee referee;
 
     @ManyToOne
-    @JoinColumn(name = "first_player_id")
+    @JoinColumn(name = "firstPlayerId")
     private Player firstPlayer;
 
     @ManyToOne
-    @JoinColumn(name = "second_player_id")
+    @JoinColumn(name = "secondPlayerId")
     private Player secondPlayer;
 
     @Override

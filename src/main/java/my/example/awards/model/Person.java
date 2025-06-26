@@ -10,7 +10,7 @@ public class Person {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "first_name")
+    @Column(name = "fullName")
     private String fullName;
 
     public String getFullName() {

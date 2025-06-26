@@ -5,6 +5,6 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public record LicenseInfo(
-        @Column(name = "sn") Integer serialNumber,
+        @Column(name = "serialNum") Integer serialNumber,
         @Column(name = "descr") String description) {
 }

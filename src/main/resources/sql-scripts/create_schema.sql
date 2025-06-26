@@ -27,14 +27,14 @@ drop table if exists player_sport_school cascade;
 drop table if exists referee cascade;
 drop table if exists sport_school cascade;
 
-drop sequence if exists competition_SEQ;
-create sequence competition_SEQ start with 1 increment by 50;
+drop sequence if exists competition_id_seq;
+create sequence competition_id_seq start with 1 increment by 1;
 
 create table award (
     id integer not null,
     winner_id integer,
-    year_ smallint not null,
-    title varchar(255) not null,
+    award_year smallint not null,
+    award_title varchar(255) not null,
     primary key (id)
 );
 
@@ -51,17 +51,18 @@ create table competition (
 );
 
 create table license (
-    sn integer,
+    serial_num integer,
     id bigserial not null,
     descr varchar(255),
-    license_number varchar(255),
-    primary key (id)
+    license_num varchar(255),
+    primary key (id),
+    constraint licenseNumUniq unique (license_num)
 );
 
 create table player (
     id integer not null,
     rating integer,
-    first_name varchar(255),
+    full_name varchar(255),
     primary key (id)
 );
 
@@ -74,7 +75,7 @@ create table player_sport_school (
 create table referee (
     id integer not null,
     license_id bigint unique,
-    first_name varchar(255),
+    full_name varchar(255),
     primary key (id)
 );
 
@@ -88,6 +89,8 @@ CREATE TABLE sport_school_rating(
     school_id varchar(255) not null,
     rating integer not null
 );
+
+create index winnerIdIdx on award (winner_id);
 
 alter table if exists award
     add constraint FK7p0urodh5nikt550flbqsk5mf

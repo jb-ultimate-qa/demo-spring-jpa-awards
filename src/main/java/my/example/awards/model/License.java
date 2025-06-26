@@ -3,14 +3,16 @@ package my.example.awards.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "license")
+@Table(name = "license", uniqueConstraints = {
+        @UniqueConstraint(name = "licenseNumUniq", columnNames = {"licenseNum"})
+})
 public class License {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "license_number")
+    @Column(name = "licenseNum")
     private String licenseNumber;
 
     @Embedded

@@ -15,9 +15,9 @@ public class Player extends Person {
     private Set<Award> awards = new LinkedHashSet<>();
 
     @ManyToMany
-    @JoinTable(name = "player_sport_school",
-            joinColumns = @JoinColumn(name = "player_id"),
-            inverseJoinColumns = @JoinColumn(name = "sport_school_id"))
+    @JoinTable(name = "PlayerSportSchool",
+            joinColumns = @JoinColumn(name = "playerId"),
+            inverseJoinColumns = @JoinColumn(name = "sportSchoolId"))
     private Set<SportSchool> sportSchools = new LinkedHashSet<>();
 
     public Set<SportSchool> getSportSchools() {

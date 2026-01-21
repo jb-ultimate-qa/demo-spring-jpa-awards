@@ -5,7 +5,6 @@ services:
     image: ibmcom/db2:11.5.7.0
     container_name: ibm_db2_11.5
     privileged: true
-    restart: always
     ports:
       - "50000:50000"
     environment:

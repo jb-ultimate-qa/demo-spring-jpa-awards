@@ -43,7 +43,7 @@
             </column>
             <column name="license_number" type="VARCHAR(255)"/>
             <column name="sn" type="INT"/>
-            <column name="descr" type="VARCHAR"/>
+            <column name="descr" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
     <changeSet id="1726062011623-5" author="Irina.Lovtsova">

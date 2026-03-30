@@ -19,6 +19,9 @@ bin/
 
 ### IntelliJ IDEA ###
 .idea
+!.idea/dataSources/data_sources_history.xml
+!.idea/dataSources.local.xml
+!.idea/dataSources.xml
 *.iws
 *.iml
 *.ipr

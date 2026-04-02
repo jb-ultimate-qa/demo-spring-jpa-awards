@@ -2,7 +2,6 @@ package my.example.awards.components;
 
 import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
-import my.example.awards.model.Award;
 import my.example.awards.model.License;
 import org.hibernate.Session;
 import org.hibernate.engine.spi.SessionImplementor;
@@ -21,8 +20,8 @@ public class LicenseTransactionalService {
     EntityManager entityManager;
     HelperService helper;
 
-    @Transactional()
-    public void checkEntityStatesFlow1() {
+    @Transactional
+    public void checkEntityStatesFlow() {
         System.out.println("\nTransaction begin");
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
 
@@ -32,68 +31,50 @@ public class LicenseTransactionalService {
 
         // State 1: Transient
         License license = new License("TestLicenseNumber");
-        printLicenseEntityState(context, hibernateSession, license, "before persist");
+        printEntityState(context, hibernateSession, license, "before persist");
 
         // State 2: Persistent
         entityManager.persist(license);
-        printLicenseEntityState(context, hibernateSession, license, "after persist");
+        printEntityState(context, hibernateSession, license, "after persist");
 
         // State 3: Detached
         entityManager.detach(license);
-        printLicenseEntityState(context, hibernateSession, license, "after detach");
+        printEntityState(context, hibernateSession, license, "after detach");
 
         // State 4: Persistent for returned instance (after merge)
         License managedLicence = entityManager.merge(license);
-        printLicenseEntityState(context, hibernateSession, managedLicence, "after merge");
+        printEntityState(context, hibernateSession, managedLicence, "after merge");
 
         // State 4: Removed
         entityManager.remove(managedLicence);
-        printLicenseEntityState(context, hibernateSession, managedLicence, "after remove");
+        printEntityState(context, hibernateSession, managedLicence, "after remove");
 
         // State: Transient
         entityManager.flush();
-        printLicenseEntityState(context, hibernateSession, managedLicence, "after flush");
+        printEntityState(context, hibernateSession, managedLicence, "after flush");
 
         entityManager.clear();
-        printLicenseEntityState(context, hibernateSession, managedLicence, "after clear");
-
-        System.out.println("~~~~~~~~~~~~~~~~~~~~");
-        System.out.println("Transaction complete");
-    }
-
-    @Transactional()
-    public void checkEntityStatesFlow2() {
-        System.out.println("\nTransaction begin");
-        System.out.println("~~~~~~~~~~~~~~~~~~~~");
-
-        Session hibernateSession = entityManager.unwrap(Session.class);
-        var session = entityManager.unwrap(SessionImplementor.class);
-        PersistenceContext context = session.getPersistenceContext();
-
-        Award awardEntity = new Award(123, (short)2002, "TestAward");
-        entityManager.persist(awardEntity);
-        entityManager.detach(awardEntity);
-        Award managedAwardEntity = entityManager.merge(awardEntity);
-        entityManager.remove(managedAwardEntity);
-        entityManager.clear();
+        printEntityState(context, hibernateSession, managedLicence, "after clear");
 
         System.out.println("~~~~~~~~~~~~~~~~~~~~");
         System.out.println("Transaction complete");
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public void checkEntityStatesFlow() {
+    public void checkTransactionPropagation() {
         Session hibernateSession = entityManager.unwrap(Session.class);
         var session = entityManager.unwrap(SessionImplementor.class);
         PersistenceContext context = session.getPersistenceContext();
-        License license = new License("TestLicenseNumber");
+        License license = new License("TransactionPropagation_TestLicenseNumber");
         entityManager.persist(license);
-        helper.printLicenseEntityState2(context, hibernateSession, license, "after persist");
+        helper.printLicenseEntityStateRequired(context, hibernateSession, license, "after persist");
+        helper.printLicenseEntityStateRequiresNew(context, hibernateSession, license, "after persist");
+        helper.printLicenseEntityStateDefaultRequired(context, hibernateSession, license, "after persist");
         entityManager.clear();
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    protected void printLicenseEntityState(PersistenceContext context, Session session, License license, String actionDescription) {
+    @Transactional
+    protected void printEntityState(PersistenceContext context, Session session, License license, String actionDescription) {
         int entityCount = session.getStatistics().getEntityCount();
         try {
             Status entityState = context.getEntry(license).getStatus();
@@ -104,11 +85,7 @@ public class LicenseTransactionalService {
             );
         }
         catch (Exception e) {
-            System.out.println("Entity state: [out of context]" +
-                    "\t entity id: " + license.getId() + ", " +
-                    "\t entity count: " + entityCount +
-                    "\t (" + actionDescription + ")"
-            );
+            System.out.println("Entity state: [out of context]\t entity id: " + license.getId() + ", \t entity count: " + entityCount + "\t (" + actionDescription + ")");
         }
     }
 }

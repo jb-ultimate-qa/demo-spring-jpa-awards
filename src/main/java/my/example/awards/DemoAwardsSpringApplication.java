@@ -1,5 +1,6 @@
 package my.example.awards;
 
+import my.example.awards.components.AwardsTransactionalService;
 import my.example.awards.components.LicenseTransactionalService;
 import my.example.awards.components.MyComponent;
 import my.example.awards.components.MyService;
@@ -12,11 +13,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 @SpringBootApplication
 public class DemoAwardsSpringApplication implements CommandLineRunner {
 
-    private final LicenseTransactionalService licenseService;
+    private final LicenseTransactionalService licenseTransactionalService;
+    private final AwardsTransactionalService awardsTransactionalService;
 
     @Autowired
-    public DemoAwardsSpringApplication(LicenseTransactionalService licenseService){
-        this.licenseService = licenseService;
+    public DemoAwardsSpringApplication(LicenseTransactionalService licenseTransactionalService, AwardsTransactionalService awardsTransactionalService){
+        this.licenseTransactionalService = licenseTransactionalService;
+        this.awardsTransactionalService = awardsTransactionalService;
     }
 
     public static void main(String[] args) {
@@ -29,7 +32,9 @@ public class DemoAwardsSpringApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        licenseService.checkEntityStatesFlow();
+//        licenseTransactionalService.checkEntityStatesFlow();
+//        licenseTransactionalService.checkTransactionPropagation();
+//        awardsTransactionalService.checkAwardEntityStatesFlow();
     }
 
     public static void printURLs(){

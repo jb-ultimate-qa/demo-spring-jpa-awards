@@ -1,0 +1,288 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1777561933504-1
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_award
+                  name: id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: year_
+                  type: SMALLINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: title
+                  type: VARCHAR(255)
+              - column:
+                  name: winner_id
+                  type: INT
+            tableName: award
+  - changeSet:
+      id: 1777561933504-2
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_competition
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+              - column:
+                  name: competition_level
+                  type: SMALLINT
+              - column:
+                  name: referee_id
+                  type: INT
+              - column:
+                  name: first_player_id
+                  type: INT
+              - column:
+                  name: second_player_id
+                  type: INT
+              - column:
+                  name: city
+                  type: VARCHAR(255)
+              - column:
+                  name: stadium
+                  type: VARCHAR(255)
+            tableName: competition
+  - changeSet:
+      id: 1777561933504-3
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_license
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: license_number
+                  type: VARCHAR(255)
+              - column:
+                  name: sn
+                  type: INT
+              - column:
+                  name: descr
+                  type: VARCHAR(255)
+            tableName: license
+  - changeSet:
+      id: 1777561933504-4
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_player
+                  name: id
+                  type: INT
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+              - column:
+                  name: rating
+                  type: INT
+            tableName: player
+  - changeSet:
+      id: 1777561933504-5
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_player_sport_school
+                  name: player_id
+                  type: INT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_player_sport_school
+                  name: sport_school_id
+                  type: VARCHAR(255)
+            tableName: player_sport_school
+  - changeSet:
+      id: 1777561933504-6
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_referee
+                  name: id
+                  type: INT
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+              - column:
+                  name: license_id
+                  type: BIGINT
+            tableName: referee
+  - changeSet:
+      id: 1777561933504-7
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_sport_school
+                  name: id
+                  type: VARCHAR(255)
+              - column:
+                  name: title
+                  type: VARCHAR(255)
+            tableName: sport_school
+  - changeSet:
+      id: 1777561933504-8
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: school_id
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: rating
+                  type: INT
+            tableName: sport_school_rating
+  - changeSet:
+      id: 1777561933504-9
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: license_id
+            constraintName: uc_referee_license
+            tableName: referee
+  - changeSet:
+      id: 1777561933504-10
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: winner_id
+            baseTableName: award
+            constraintName: FK_AWARD_ON_WINNER
+            referencedColumnNames: id
+            referencedTableName: player
+  - changeSet:
+      id: 1777561933504-11
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: first_player_id
+            baseTableName: competition
+            constraintName: FK_COMPETITION_ON_FIRST_PLAYER
+            referencedColumnNames: id
+            referencedTableName: player
+  - changeSet:
+      id: 1777561933504-12
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: referee_id
+            baseTableName: competition
+            constraintName: FK_COMPETITION_ON_REFEREE
+            referencedColumnNames: id
+            referencedTableName: referee
+  - changeSet:
+      id: 1777561933504-13
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: second_player_id
+            baseTableName: competition
+            constraintName: FK_COMPETITION_ON_SECOND_PLAYER
+            referencedColumnNames: id
+            referencedTableName: player
+  - changeSet:
+      id: 1777561933504-14
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: license_id
+            baseTableName: referee
+            constraintName: FK_REFEREE_ON_LICENSE
+            referencedColumnNames: id
+            referencedTableName: license
+  - changeSet:
+      id: 1777561933504-15
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: player_id
+            baseTableName: player_sport_school
+            constraintName: fk_plasposch_on_player
+            referencedColumnNames: id
+            referencedTableName: player
+  - changeSet:
+      id: 1777561933504-16
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: sport_school_id
+            baseTableName: player_sport_school
+            constraintName: fk_plasposch_on_sport_school
+            referencedColumnNames: id
+            referencedTableName: sport_school
+  - changeSet:
+      id: 1777561933504-17
+      author: Irina.Lovtsova
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: school_id
+            baseTableName: sport_school_rating
+            constraintName: fk_sport_school_rating_on_sport_school
+            referencedColumnNames: id
+            referencedTableName: sport_school
+

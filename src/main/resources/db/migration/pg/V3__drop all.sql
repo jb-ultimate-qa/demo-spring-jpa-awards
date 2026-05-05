@@ -1,0 +1,49 @@
+-- ALTER TABLE award
+-- DROP
+-- CONSTRAINT fk_award_on_winner;
+--
+-- ALTER TABLE competition
+-- DROP
+-- CONSTRAINT fk_competition_on_first_player;
+--
+-- ALTER TABLE competition1
+-- DROP
+-- CONSTRAINT fk_competition_on_referee;
+--
+-- ALTER TABLE competition
+-- DROP
+-- CONSTRAINT fk_competition_on_second_player;
+--
+-- ALTER TABLE player_sport_school
+-- DROP
+-- CONSTRAINT fk_plasposch_on_player;
+--
+-- ALTER TABLE player_sport_school
+-- DROP
+-- CONSTRAINT fk_plasposch_on_sport_school;
+--
+-- ALTER TABLE referee
+-- DROP
+-- CONSTRAINT fk_referee_on_license;
+--
+-- ALTER TABLE sport_school_rating
+-- DROP
+-- CONSTRAINT fk_sport_school_rating_on_sport_school;
+--
+-- DROP TABLE award CASCADE;
+--
+-- DROP TABLE competition CASCADE;
+--
+-- DROP TABLE license CASCADE;
+--
+-- DROP TABLE player CASCADE;
+--
+-- DROP TABLE player_sport_school CASCADE;
+--
+-- DROP TABLE referee CASCADE;
+--
+-- DROP TABLE sport_school CASCADE;
+--
+-- DROP TABLE sport_school_rating CASCADE;
+--
+-- DROP SEQUENCE competition_seq CASCADE;

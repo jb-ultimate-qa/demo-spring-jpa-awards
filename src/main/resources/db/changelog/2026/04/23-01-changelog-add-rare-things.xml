@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.33.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1776930370908-5" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <tableExists tableName="license"/>
+            <not>
+                <columnExists columnName="new_column" tableName="license"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="license">
+            <column name="new_column" type="VARCHAR(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="1776930370908-6" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="id" tableName="my_entity"/>
+        </preConditions>
+
+        <addPrimaryKey columnNames="id" constraintName="pk_my_entity" tableName="my_entity"/>
+    </changeSet>
+    <changeSet id="1776930370908-7" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="title" tableName="award"/>
+        </preConditions>
+
+        <addUniqueConstraint columnNames="title" constraintName="uc_award_title" tableName="award"/>
+    </changeSet>
+    <changeSet id="1776930370908-8" author="tester">
+        <preConditions onFail="WARN" onSqlOutput="IGNORE">
+            <not>
+                <indexExists indexName="first_player_id_inx" tableName="competition"/>
+            </not>
+        </preConditions>
+
+        <createIndex indexName="first_player_id_inx" tableName="competition">
+            <column name="first_player_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="1776930370908-9" author="tester">
+        <preConditions onFail="WARN" onSqlOutput="IGNORE">
+            <not>
+                <indexExists indexName="referee_id_uc" tableName="competition"/>
+            </not>
+        </preConditions>
+
+        <createIndex indexName="referee_id_uc" tableName="competition" unique="true">
+            <column name="referee_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="1776930370908-1" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="id" tableName="player"/>
+        </preConditions>
+
+        <addAutoIncrement columnDataType="int" columnName="id" tableName="player"/>
+
+        <rollback>
+            <empty/>
+        </rollback>
+    </changeSet>
+    <changeSet id="1776930370908-2" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="id" tableName="referee"/>
+        </preConditions>
+
+        <addAutoIncrement columnDataType="int" columnName="id" tableName="referee"/>
+
+        <rollback>
+            <empty/>
+        </rollback>
+    </changeSet>
+    <changeSet id="1776930370908-3" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="license_number" tableName="license"/>
+        </preConditions>
+
+        <addDefaultValue columnDataType="varchar(255)" columnName="license_number" defaultValue="new license"
+                         tableName="license"/>
+    </changeSet>
+    <changeSet id="1776930370908-4" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="stadium" tableName="competition"/>
+        </preConditions>
+
+        <addNotNullConstraint columnDataType="VARCHAR(255)" columnName="stadium" tableName="competition"
+                              validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>

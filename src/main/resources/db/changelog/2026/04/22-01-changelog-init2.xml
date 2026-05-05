@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.33.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1776871011004-1" author="tester">
+        <preConditions onFail="WARN" onSqlOutput="IGNORE">
+            <not>
+                <sequenceExists sequenceName="competition_seq"/>
+            </not>
+        </preConditions>
+
+        <createSequence incrementBy="50" sequenceName="competition_seq" startValue="1"/>
+    </changeSet>
+    <changeSet id="1776871011004-2" author="tester">
+        <preConditions onFail="WARN" onSqlOutput="IGNORE">
+            <not>
+                <tableExists tableName="award"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="award">
+            <column name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_award"/>
+            </column>
+            <column name="year_" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="title" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="winner_id" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1776871011004-3" author="tester">
+        <preConditions onFail="WARN" onSqlOutput="IGNORE">
+            <not>
+                <tableExists tableName="competition"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="competition">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_competition"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="competition_level" type="SMALLINT"/>
+            <column name="referee_id" type="INT"/>
+            <column name="first_player_id" type="INT"/>
+            <column name="second_player_id" type="INT"/>
+            <column name="city" type="VARCHAR(255)"/>
+            <column name="stadium" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1776871011004-4" author="tester">
+        <preConditions onFail="WARN" onSqlOutput="IGNORE">
+            <not>
+                <tableExists tableName="license"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="license">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_license"/>
+            </column>
+            <column defaultValue="sfd" name="license_number" type="VARCHAR(255)"/>
+            <column name="sn" type="INT"/>
+            <column name="descr" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1776871011004-5" author="tester">
+        <preConditions onFail="WARN" onSqlOutput="IGNORE">
+            <not>
+                <tableExists tableName="player"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="player">
+            <column name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_player"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="rating" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1776871011004-6" author="tester">
+        <preConditions onFail="WARN" onSqlOutput="IGNORE">
+            <not>
+                <tableExists tableName="player_sport_school"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="player_sport_school">
+            <column name="player_id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_player_sport_school"/>
+            </column>
+            <column name="sport_school_id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_player_sport_school"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1776871011004-7" author="tester">
+        <preConditions onFail="WARN" onSqlOutput="IGNORE">
+            <not>
+                <tableExists tableName="referee"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="referee">
+            <column name="id" type="INT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_referee"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="license_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1776871011004-8" author="tester">
+        <preConditions onFail="WARN" onSqlOutput="IGNORE">
+            <not>
+                <tableExists tableName="sport_school"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="sport_school">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sport_school"/>
+            </column>
+            <column name="title" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1776871011004-9" author="tester">
+        <preConditions onFail="WARN" onSqlOutput="IGNORE">
+            <not>
+                <tableExists tableName="sport_school_rating"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="sport_school_rating">
+            <column name="school_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rating" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1776871011004-10" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="license_id" tableName="referee"/>
+        </preConditions>
+
+        <addUniqueConstraint columnNames="license_id" constraintName="uc_referee_license" tableName="referee"/>
+    </changeSet>
+    <changeSet id="1776871011004-11" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="winner_id" tableName="award"/>
+            <columnExists columnName="id" tableName="player"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="FK_AWARD_ON_WINNER" foreignKeyTableName="award"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="winner_id" baseTableName="award" constraintName="FK_AWARD_ON_WINNER"
+                                 referencedColumnNames="id" referencedTableName="player"/>
+    </changeSet>
+    <changeSet id="1776871011004-12" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="first_player_id" tableName="competition"/>
+            <columnExists columnName="id" tableName="player"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="FK_COMPETITION_ON_FIRST_PLAYER"
+                                            foreignKeyTableName="competition"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="first_player_id" baseTableName="competition"
+                                 constraintName="FK_COMPETITION_ON_FIRST_PLAYER" referencedColumnNames="id"
+                                 referencedTableName="player"/>
+    </changeSet>
+    <changeSet id="1776871011004-13" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="referee_id" tableName="competition"/>
+            <columnExists columnName="id" tableName="referee"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="FK_COMPETITION_ON_REFEREE"
+                                            foreignKeyTableName="competition"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="referee_id" baseTableName="competition"
+                                 constraintName="FK_COMPETITION_ON_REFEREE" referencedColumnNames="id"
+                                 referencedTableName="referee"/>
+    </changeSet>
+    <changeSet id="1776871011004-14" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="second_player_id" tableName="competition"/>
+            <columnExists columnName="id" tableName="player"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="FK_COMPETITION_ON_SECOND_PLAYER"
+                                            foreignKeyTableName="competition"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="second_player_id" baseTableName="competition"
+                                 constraintName="FK_COMPETITION_ON_SECOND_PLAYER" referencedColumnNames="id"
+                                 referencedTableName="player"/>
+    </changeSet>
+    <changeSet id="1776871011004-15" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="license_id" tableName="referee"/>
+            <columnExists columnName="id" tableName="license"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="FK_REFEREE_ON_LICENSE" foreignKeyTableName="referee"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="license_id" baseTableName="referee"
+                                 constraintName="FK_REFEREE_ON_LICENSE" referencedColumnNames="id"
+                                 referencedTableName="license"/>
+    </changeSet>
+    <changeSet id="1776871011004-16" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="player_id" tableName="player_sport_school"/>
+            <columnExists columnName="id" tableName="player"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_plasposch_on_player"
+                                            foreignKeyTableName="player_sport_school"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="player_id" baseTableName="player_sport_school"
+                                 constraintName="fk_plasposch_on_player" referencedColumnNames="id"
+                                 referencedTableName="player"/>
+    </changeSet>
+    <changeSet id="1776871011004-17" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="sport_school_id" tableName="player_sport_school"/>
+            <columnExists columnName="id" tableName="sport_school"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_plasposch_on_sport_school"
+                                            foreignKeyTableName="player_sport_school"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="sport_school_id" baseTableName="player_sport_school"
+                                 constraintName="fk_plasposch_on_sport_school" referencedColumnNames="id"
+                                 referencedTableName="sport_school"/>
+    </changeSet>
+    <changeSet id="1776871011004-18" author="tester">
+        <preConditions onFail="CONTINUE" onSqlOutput="IGNORE">
+            <columnExists columnName="school_id" tableName="sport_school_rating"/>
+            <columnExists columnName="id" tableName="sport_school"/>
+            <not>
+                <foreignKeyConstraintExists foreignKeyName="fk_sport_school_rating_on_sport_school"
+                                            foreignKeyTableName="sport_school_rating"/>
+            </not>
+        </preConditions>
+
+        <addForeignKeyConstraint baseColumnNames="school_id" baseTableName="sport_school_rating"
+                                 constraintName="fk_sport_school_rating_on_sport_school" referencedColumnNames="id"
+                                 referencedTableName="sport_school"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.33.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1777459697359-3" author="tester" failOnError="false" runOnChange="true">
+        <preConditions>
+            <sequenceExists sequenceName="competition_seq"/>
+            <not>
+                <sequenceExists sequenceName="new_seq_name"/>
+            </not>
+        </preConditions>
+
+        <renameSequence oldSequenceName="competition_seq" newSequenceName="new_seq_name"/>
+
+        <empty/>
+    </changeSet>
+    <changeSet id="1777459697359-4" author="tester" failOnError="false" runOnChange="true">
+        <preConditions>
+            <tableExists tableName="my_entity"/>
+            <not>
+                <tableExists tableName="my_entity_new"/>
+            </not>
+        </preConditions>
+
+        <renameTable oldTableName="my_entity" newTableName="my_entity_new"/>
+
+        <empty/>
+    </changeSet>
+    <changeSet id="1777459697359-5" author="tester" failOnError="false" runOnChange="true">
+        <preConditions>
+            <columnExists tableName="award" columnName="title"/>
+            <not>
+                <columnExists tableName="award" columnName="new_title"/>
+            </not>
+        </preConditions>
+
+        <renameColumn tableName="award" oldColumnName="title" newColumnName="new_title" columnDataType="VARCHAR(255)"/>
+
+        <empty/>
+    </changeSet>
+    <changeSet id="1777459697359-2" author="tester" failOnError="false" runOnChange="true">
+        <preConditions>
+            <columnExists tableName="award" columnName="year_"/>
+        </preConditions>
+
+        <modifyDataType tableName="award" columnName="year_" newDataType="BIGINT"/>
+
+        <empty/>
+    </changeSet>
+
+</databaseChangeLog>

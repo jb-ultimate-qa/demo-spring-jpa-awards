@@ -11,8 +11,11 @@ public class Award {
 
     @Column(name = "year_", nullable = false)
     private Short year;
+//    private Long year;
 
-    @Column(name = "title", nullable = false)
+//    @Column(name = "title", nullable = false, unique = true)
+    @Column(name = "newTitle", nullable = false)
+//    @Column(name = "title", nullable = false)
     private String title;
 
     @ManyToOne

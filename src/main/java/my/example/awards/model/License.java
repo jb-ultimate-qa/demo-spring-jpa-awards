@@ -1,6 +1,7 @@
 package my.example.awards.model;
 
 import jakarta.persistence.*;
+//import org.hibernate.annotations.ColumnDefault;
 
 @Entity
 @Table(name = "license")
@@ -11,7 +12,10 @@ public class License {
     private Long id;
 
     @Column(name = "license_number")
+    //@ColumnDefault("new license")
     private String licenseNumber;
+
+    //private String newColumn;
 
     @Embedded
     private LicenseInfo licenseInfo;

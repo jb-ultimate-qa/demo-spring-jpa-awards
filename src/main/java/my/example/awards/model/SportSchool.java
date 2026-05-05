@@ -7,6 +7,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "sport_school")
+//@Table(name = "sport_school", indexes = {@Index(name = "sport_school_title", columnList = "title")})
 public class SportSchool {
     @Id
     @Column(name = "id", nullable = false)

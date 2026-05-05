@@ -4,9 +4,13 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "competition")
+//@Table(name = "competition", indexes = {@Index(name = "referee_id_uc", columnList = "referee_id", unique = true),
+//        @Index(name = "first_player_id_inx", columnList = "first_player_id", unique = false)})
 public class Competition {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "default")
+//    @SequenceGenerator(name = "default", sequenceName = "new_seq_name")
     @Column(name = "id", nullable = false)
     private Long id;
 

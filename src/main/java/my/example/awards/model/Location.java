@@ -9,6 +9,7 @@ public class Location {
     private String city;
 
     @Column(name = "stadium")
+    //    @Column(name = "stadium", nullable = false)
     private String stadium;
 
     public String getStadium() {

@@ -1,7 +1,10 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.3.3'
-    id 'io.spring.dependency-management' version '1.1.6'
+//    id 'org.springframework.boot' version '3.3.3'    // Hibernate 6.5
+//    id 'org.springframework.boot' version '3.5.14'   // Hibernate 6.6
+    id 'org.springframework.boot' version '4.0.6'    // Hibernate 7.2
+//    id 'org.springframework.boot' version '4.1.0-RC' // Hibernate 7.2
+    id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'my.example'
@@ -30,13 +33,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     implementation 'org.flywaydb:flyway-core'
-    implementation 'org.flywaydb:flyway-database-postgresql'
+//    implementation 'org.flywaydb:flyway-database-postgresql'
     implementation 'org.liquibase:liquibase-core'
 //    compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
 //    annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc11'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

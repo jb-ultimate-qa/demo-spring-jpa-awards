@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "child")
+@Table(name = "inh_child")
 @AttributeOverride(name = "parentAttribute", column = @Column(nullable = false))
 public class Child extends Parent {
     @Column(name = "child_attribute")

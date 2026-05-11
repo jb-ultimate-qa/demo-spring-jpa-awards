@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 import java.util.*;
 
 @Entity
-@Table(name = "sport_school")
+@Table(name = "aw_sport_school")
 public class SportSchool {
     @Id
     @Column(name = "id", nullable = false)
@@ -17,7 +17,7 @@ public class SportSchool {
 
     @ElementCollection
     @Column(name = "rating", nullable = false)
-    @CollectionTable(name = "sport_school_rating", joinColumns = @JoinColumn(name = "school_id"))
+    @CollectionTable(name = "aw_sport_school_rating", joinColumns = @JoinColumn(name = "school_id"))
     private List<Integer> ratingSet = new ArrayList<>();
 
     public String getTitle() {

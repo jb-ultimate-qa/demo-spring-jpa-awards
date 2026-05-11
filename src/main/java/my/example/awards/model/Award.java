@@ -3,7 +3,7 @@ package my.example.awards.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "award")
+@Table(name = "aw_award")
 public class Award {
     @Id
     @Column(name = "id", nullable = false)

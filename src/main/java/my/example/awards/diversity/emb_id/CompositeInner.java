@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "composite_inner")
+@Table(name = "emid_composite_inner")
 public class CompositeInner {
 
     @Embeddable

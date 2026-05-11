@@ -3,7 +3,7 @@ package my.example.awards.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "competition")
+@Table(name = "aw_competition")
 public class Competition {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -6,7 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "player")
+@Table(name = "aw_player")
 public class Player extends Person {
     @Column(name = "rating")
     private Integer rating;
@@ -15,7 +15,7 @@ public class Player extends Person {
     private Set<Award> awards = new LinkedHashSet<>();
 
     @ManyToMany
-    @JoinTable(name = "player_sport_school",
+    @JoinTable(name = "aw_player_sport_school",
             joinColumns = @JoinColumn(name = "player_id"),
             inverseJoinColumns = @JoinColumn(name = "sport_school_id"))
     private Set<SportSchool> sportSchools = new LinkedHashSet<>();

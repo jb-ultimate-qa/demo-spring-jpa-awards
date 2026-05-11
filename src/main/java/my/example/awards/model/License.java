@@ -3,7 +3,7 @@ package my.example.awards.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "license")
+@Table(name = "aw_license")
 public class License {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

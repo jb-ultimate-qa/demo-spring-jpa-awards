@@ -6,7 +6,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "referee")
+@Table(name = "aw_referee")
 public class Referee extends Person {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "license_id")

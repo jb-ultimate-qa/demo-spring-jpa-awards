@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <property  name="clob.type"  value="clob"  dbms="oracle,postgresql"/>
+    <property  name="clob.type"  value="longtext"  dbms="mysql"/>
+    <property  name="table.name"  value="table_from_prop"/>
 
     <include file="db/changelog/2024/09/11-01-changelog.xml"/>
     <include file="db/changelog/2024/12/26-01-changelog.xml"/>
@@ -12,4 +13,6 @@
     <include file="/db/changelog/2026/04/23-01-changelog-add-rare-things.xml"/>
     <include file="/db/changelog/2026/04/23-04-changelog-drops.xml"/>
     <include file="/db/changelog/2026/04/29-01-changelog-merge-changes.xml"/>
+
+    <include file="db/changelog/2026/05/testing-properties.xml"/>
 </databaseChangeLog>

@@ -16,7 +16,16 @@
             <column name="id" type="INT">
                 <constraints nullable="false"/>
             </column>
+            <column name="small_number" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
+    </changeSet>
+    <changeSet id="1776872554839-2" author="tester">
+        <insert tableName="my_entity">
+            <column name="id">1</column>
+            <column name="small_number">1</column>
+        </insert>
     </changeSet>
 
 </databaseChangeLog>

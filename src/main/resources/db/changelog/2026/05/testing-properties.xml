@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <property name="db_oriented_column_name" value="oracle_default" dbms="oracle"/>
+    <property name="db_oriented_column_name" value="pg_default" dbms="postgresql"/>
+    <property name="db_oriented_column_name" value="" dbms="mssql"/>
+    <property name="name_for_all_dbms" value="universal_column_name"/>
+
+    <changeSet  id="11111111111111111"  author="author">
+        <createTable tableName="${unexisting_placeholder}">
+            <column  name="id"  type="int"/>
+        </createTable>
+        <createTable tableName="${table.name}">
+            <column  name="id"  type="int"/>
+            <column  name="${name_for_all_dbms}"  type="${clob.type}"/>
+            <column  name="${db_oriented_column_name}"  type="int"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="0" author="admin">
+
+    </changeSet>
+</databaseChangeLog>

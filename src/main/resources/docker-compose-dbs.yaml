@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:18.4-alpine # 104 MB
+    container_name: postgres-awards-spr
+    environment:
+      POSTGRES_DB: postgres-awards-spr
+      POSTGRES_USER: ideatest
+      POSTGRES_PASSWORD: ideatest
+#    profiles:
+#      - pgdocker
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - ./db_docker_init/pg:/docker-entrypoint-initdb.d
+# rerun scripts to fill data:
+# docker exec idea-postgres sh -c "psql -v ON_ERROR_STOP=1 -U ideatest -d ideatest -f /docker-entrypoint-initdb.d/01_create_schema.sql && psql -v ON_ERROR_STOP=1 -U ideatest -d ideatest -f /docker-entrypoint-initdb.d/02_fill_data.sql"
+volumes:
+  postgres_data:

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="db/pg/changelog/2024/09/11-01-changelog.xml"/>
+    <include file="db/pg/changelog/2024/12/26-01-changelog.xml"/>
+    <include file="db/pg/changelog/2024/12/26-01-changelog.xml"/>
+
+    <changeSet id="1748938068554-2" author="Irina.Lovtsova">
+        <addColumn tableName="competition">
+            <column name="title123" type="VARCHAR(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="1748938068554-3" author="Irina.Lovtsova">
+        <addColumn tableName="award">
+            <column name="year_1" type="SMALLINT"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="1748938068554-4" author="Irina.Lovtsova">
+        <addNotNullConstraint columnName="year_1" tableName="award"/>
+    </changeSet>
+    <changeSet id="1748938068554-5" author="Irina.Lovtsova">
+        <dropColumn columnName="title" tableName="competition"/>
+    </changeSet>
+    <changeSet id="1748938068554-6" author="Irina.Lovtsova">
+        <dropColumn columnName="year_" tableName="award"/>
+    </changeSet>
+    <changeSet id="1748938068554-1" author="Irina.Lovtsova (generated)">
+        <modifyDataType columnName="stadium"
+                        newDataType="VARCHAR(50)"
+                        tableName="competition"/>
+    </changeSet>
+
+
+
+
+</databaseChangeLog>

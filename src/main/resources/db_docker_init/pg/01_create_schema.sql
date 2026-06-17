@@ -1,34 +1,7 @@
-alter table if exists award
-    drop constraint if exists FK7p0urodh5nikt550flbqsk5mf;
+drop schema if exists public cascade;
+create schema public;
 
-alter table if exists competition
-    drop constraint if exists FKbg9ud9wc0m0cdeie10fvh6m1e;
-
-alter table if exists competition
-    drop constraint if exists FKlw55agtwp4su7n6ssbbmim7pe;
-
-alter table if exists competition
-    drop constraint if exists FKj955lv10edixexa8w6yby4an6;
-
-alter table if exists player_sport_school
-    drop constraint if exists FKl05qhl4c76uituv2evekrxjxt;
-
-alter table if exists player_sport_school
-    drop constraint if exists FK9uwppqp2378tpgjuce52ru2by;
-
-alter table if exists referee
-     drop constraint if exists FKjtcthd6tb5fu26kvn6d7pf2o3;
-
-drop table if exists award cascade;
-drop table if exists competition cascade;
-drop table if exists license cascade;
-drop table if exists player cascade;
-drop table if exists player_sport_school cascade;
-drop table if exists referee cascade;
-drop table if exists sport_school cascade;
-
-drop sequence if exists competition_SEQ;
-create sequence competition_SEQ start with 1 increment by 50;
+create sequence competition_seq start with 1 increment by 50;
 
 create table award (
     id integer not null,
@@ -90,37 +63,37 @@ CREATE TABLE sport_school_rating(
 );
 
 alter table if exists award
-    add constraint FK7p0urodh5nikt550flbqsk5mf
+    add constraint fk_award_on_winner
     foreign key (winner_id)
     references player;
 
 alter table if exists competition
-    add constraint FKbg9ud9wc0m0cdeie10fvh6m1e
+    add constraint fk_competition_on_first_player
     foreign key (first_player_id)
     references player;
 
 alter table if exists competition
-    add constraint FKlw55agtwp4su7n6ssbbmim7pe
+    add constraint fk_competition_on_referee
     foreign key (referee_id)
     references referee;
 
 alter table if exists competition
-    add constraint FKj955lv10edixexa8w6yby4an6
+    add constraint fk_competition_on_second_player
     foreign key (second_player_id)
     references player;
 
 alter table if exists player_sport_school
-    add constraint FKl05qhl4c76uituv2evekrxjxt
+    add constraint fk_plasposch_on_sport_school
     foreign key (sport_school_id)
     references sport_school;
 
 alter table if exists player_sport_school
-    add constraint FK9uwppqp2378tpgjuce52ru2by
+    add constraint fk_plasposch_on_player
     foreign key (player_id)
     references player;
 
 alter table if exists referee
-    add constraint FKjtcthd6tb5fu26kvn6d7pf2o3
+    add constraint fk_referee_on_license
     foreign key (license_id)
     references license;
 

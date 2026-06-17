@@ -16,6 +16,8 @@ services:
       # to rerun scripts, execute in terminal:
       # docker exec idea-postgres sh -c "psql -v ON_ERROR_STOP=1 -U ideatest -d ideatest -f /docker-entrypoint-initdb.d/01_create_schema.sql && psql -v ON_ERROR_STOP=1 -U ideatest -d ideatest -f /docker-entrypoint-initdb.d/02_fill_data.sql"
 
+  #_______________________________________________________________________________________________________________
+
   db2_11.5:
     container_name: db2_awards
     privileged: true
@@ -52,6 +54,41 @@ services:
 #        db2 connect reset;
 #        tail -f /dev/null'"
 
+#_______________________________________________________________________________________________________________
+
+  mssql_2019:
+    container_name: mssql_awards
+    platform: linux/amd64
+    privileged: true
+    image: datagrip/mssql-server-linux:2019
+    hostname: mssql_2019
+    ports:
+      - "1434:1433"
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: My@Super@SecretRoot
+      MSSQL_DB: mssql_awards
+      MSSQL_PID: Developer
+      MSSQL_AGENT_ENABLED: true
+      MSSQL_USER: demo_user
+      MSSQL_PASSWORD: My@Super@Secret
+#    profiles:
+#      - mssql
+    mem_limit: 2g
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \"$$SA_PASSWORD\" -Q \"SELECT 1\" -C -t 1 || exit 1" ]
+      interval: 3m
+      timeout: 10s
+      retries: 5
+    volumes:
+      - mssql_data:/var/lib/mssql
+      - ./db_docker_init/ms:/docker-entrypoint-initdb.d
+  # run scripts manually, in terminal:
+  # docker exec mssql_awards /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'My@Super@SecretRoot' -C -i /docker-entrypoint-initdb.d/02_init_schema.sql
+
+  #_______________________________________________________________________________________________________________
+
 volumes:
   postgres_data:
   db2_data:
+  mssql_data:

@@ -88,6 +88,32 @@ services:
 
   #_______________________________________________________________________________________________________________
 
+  azure_edge: # like MSSQL, also supported in Diff generation
+    #  connect from IDEA using url=jdbc:sqlserver://localhost:14337;databaseName=testdb;user=tester;password=My@Super@Secret;encrypt=false;trustServerCertificate=true
+    #  username=sa, password=My@Super@Secret
+    # jdbc:sqlserver://localhost:14337;databaseName=testdb;user=guest;password=guest1234
+    image: registry.jetbrains.team/p/datagrip/containers/azure:2.0
+    container_name: azure_edge
+    platform: linux/amd64
+    privileged: true
+    hostname: azure_edge
+    ports:
+      - "14337:1433"
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: My@Super@Secret
+      MSSQL_DB: testdb
+      MSSQL_PID: Developer
+      MSSQL_AGENT_ENABLED: true
+      MSSQL_USER: tester
+      MSSQL_PASSWORD: My@Super@Secret
+    healthcheck:
+      test: grep "Starting up database 'testdb'." /var/opt/mssql/log/errorlog || exit 1
+      interval: 1m
+      timeout: 30s
+      retries: 5
+
+  #_______________________________________________________________________________________________________________
 volumes:
   postgres_data:
   db2_data:

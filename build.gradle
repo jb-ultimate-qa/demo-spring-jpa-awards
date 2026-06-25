@@ -7,6 +7,8 @@ plugins {
 group = 'my.example'
 version = '0.0.1-SNAPSHOT'
 
+def mapstructVersion = '1.6.2'
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
@@ -33,10 +35,14 @@ dependencies {
     implementation 'org.flywaydb:flyway-database-postgresql'
     implementation 'org.liquibase:liquibase-core'
 //    compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'org.postgresql:postgresql'
 //    annotationProcessor 'org.projectlombok:lombok'
+    implementation "org.mapstruct:mapstruct:$mapstructVersion"
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapstructVersion"
+
+    runtimeOnly 'org.postgresql:postgresql'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//    testRuntimeOnly 'org.springframework.boot:spring-boot-docker-compose'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 

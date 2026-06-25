@@ -3,12 +3,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static my.example.awards.endpoints.helper.HtmlHelper.generateHtmlLinksForHello;
+
 @RestController
 @RequestMapping("/hello")
 public class HelloEndpoints {
 
-    @GetMapping(produces = "text/plain")
+    @GetMapping(produces = "text/html")
     String hello(){
-        return "Hello, User";
+        return generateHtmlLinksForHello("awards", "comp", "schools");
     }
 }

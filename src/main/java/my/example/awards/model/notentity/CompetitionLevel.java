@@ -1,4 +1,4 @@
-package my.example.awards.model;
+package my.example.awards.model.notentity;
 
 public enum CompetitionLevel {
     DISTRICT,

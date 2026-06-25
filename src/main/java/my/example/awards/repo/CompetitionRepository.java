@@ -3,7 +3,7 @@ package my.example.awards.repo;
 import my.example.awards.model.Competition;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import my.example.awards.model.CompetitionLevel;
+import my.example.awards.model.notentity.CompetitionLevel;
 
 import java.util.Collection;
 import java.util.List;
@@ -41,11 +41,11 @@ public interface CompetitionRepository extends JpaRepository<Competition, Long> 
     @Query("select c from Competition c where c.competitionLevel in ?1")
     List<Competition> findByLevelInCollection(Collection<CompetitionLevel> competitionLevels);
 
-//    // not compilable - Cannot compare left expression of type 'my.example.awards.model.CompetitionLevel' with right expression of type 'java.lang.String'
+//    // not compilable - Cannot compare left expression of type 'my.example.awards.model.notentity.CompetitionLevel' with right expression of type 'java.lang.String'
 //    @Query("select c from Competition c where c.competitionLevel in ('DISTRICT', 'REGIONAL')")
 //    List<Competition> findByLevelWrongIn();
 //
-//    // not compilable - Cannot compare left expression of type 'my.example.awards.model.CompetitionLevel' with right expression of type 'java.lang.String'
+//    // not compilable - Cannot compare left expression of type 'my.example.awards.model.notentity.CompetitionLevel' with right expression of type 'java.lang.String'
 //    @Query("select c from Competition c where c.competitionLevel = 'INTERNATIONAL'")
 //    List<Competition> findByLevelWrongEq();
 

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static my.example.awards.endpoints.helper.HtmlHelper.generateHtmlLinks;
+
 @RestController
 @RequestMapping("/schools")
 public class SportSchoolsEndpoints {
@@ -15,6 +17,11 @@ public class SportSchoolsEndpoints {
 
     public SportSchoolsEndpoints(SportSchoolRepository sportSchoolRepo) {
         this.sportSchoolRepository = sportSchoolRepo;
+    }
+
+    @GetMapping(value = "/", produces = "text/html")
+    String getLinks(){
+        return generateHtmlLinks("schools", "all");
     }
 
     @GetMapping(value = "all", produces = "text/plain")

@@ -11,6 +11,6 @@ public class HelloEndpoints {
 
     @GetMapping(produces = "text/html")
     String hello(){
-        return generateHtmlLinksForHello("awards", "comp", "schools/all");
+        return generateHtmlLinksForHello("awards", "comp", "schools");
     }
 }

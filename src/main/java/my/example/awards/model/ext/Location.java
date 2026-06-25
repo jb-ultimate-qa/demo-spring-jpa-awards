@@ -1,4 +1,4 @@
-package my.example.awards.model.notentity;
+package my.example.awards.model.ext;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

@@ -1,7 +1,7 @@
 package my.example.awards.model;
 
 import jakarta.persistence.*;
-import my.example.awards.model.notentity.LicenseInfo;
+import my.example.awards.model.ext.LicenseInfo;
 
 @Entity
 @Table(name = "license")

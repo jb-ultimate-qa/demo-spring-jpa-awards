@@ -1,7 +1,7 @@
 package my.example.awards.model;
 
 import jakarta.persistence.*;
-import my.example.awards.model.notentity.Person;
+import my.example.awards.model.ext.Person;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

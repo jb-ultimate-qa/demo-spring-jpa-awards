@@ -1,7 +1,7 @@
 package my.example.awards.model.dto;
 
 import my.example.awards.model.Competition;
-import my.example.awards.model.notentity.CompetitionLevel;
+import my.example.awards.model.ext.CompetitionLevel;
 
 import java.io.Serializable;
 

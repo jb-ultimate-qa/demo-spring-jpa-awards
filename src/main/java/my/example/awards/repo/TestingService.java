@@ -1,6 +1,6 @@
 package my.example.awards.repo;
 
-import my.example.awards.endpoints.QueryResultPrettier;
+import my.example.awards.endpoints.helper.QueryResultPrettier;
 import my.example.awards.model.Competition;
 import org.springframework.stereotype.Service;
 

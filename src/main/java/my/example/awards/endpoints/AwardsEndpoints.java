@@ -1,5 +1,6 @@
 package my.example.awards.endpoints;
 
+import my.example.awards.endpoints.helper.QueryResultPrettier;
 import my.example.awards.model.Award;
 import my.example.awards.repo.AwardRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import static my.example.awards.endpoints.helper.HtmlHelper.generateHtmlLinks;
 
 @RestController
 @RequestMapping("/awards")
@@ -19,12 +22,8 @@ public class AwardsEndpoints {
 
     @GetMapping(value = "/", produces = "text/html")
     String getLinks(){
-        return "Try this URL:</br></br>" +
-                "<a href=\"all\">all</a></br>" +
-                "<a href=\"high-rating\">high-rating</a></br>" +
-                "<a href=\"2022\">2022</a></br>";
+        return generateHtmlLinks("awards", "all", "high-rating", "2022");
     }
-
 
     @GetMapping(value = "all", produces = "text/plain")
     String getAll(){

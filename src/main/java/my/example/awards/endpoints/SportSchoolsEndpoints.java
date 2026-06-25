@@ -1,5 +1,6 @@
 package my.example.awards.endpoints;
 
+import my.example.awards.endpoints.helper.QueryResultPrettier;
 import my.example.awards.model.SportSchool;
 import my.example.awards.repo.SportSchoolRepository;
 import org.springframework.web.bind.annotation.GetMapping;

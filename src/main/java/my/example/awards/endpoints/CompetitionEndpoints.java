@@ -1,6 +1,8 @@
 package my.example.awards.endpoints;
 
 import my.example.awards.model.Competition;
+import my.example.awards.model.dto.CompetitionFullMapper;
+import my.example.awards.model.dto.CompetitionShortMapper;
 import my.example.awards.repo.CompetitionRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,9 +16,15 @@ import java.util.List;
 public class CompetitionEndpoints {
 
     private final CompetitionRepository competitionRepository;
+    private final CompetitionFullMapper competitionFullMapper;
+    private final CompetitionShortMapper competitionShortMapper;
 
-    public CompetitionEndpoints(CompetitionRepository competitionRepository) {
+    public CompetitionEndpoints(CompetitionRepository competitionRepository,
+                                CompetitionFullMapper competitionFullMapper,
+                                CompetitionShortMapper competitionShortMapper) {
         this.competitionRepository = competitionRepository;
+        this.competitionFullMapper = competitionFullMapper;
+        this.competitionShortMapper = competitionShortMapper;
     }
 
     @GetMapping(value = "/", produces = "text/html")
@@ -46,6 +54,18 @@ public class CompetitionEndpoints {
             default -> null;
         };
         if (results == null) return "nothing";
+        return QueryResultPrettier.concatenateObjects(results);
+    }
+
+    @GetMapping(value = "mapper-short-test", produces = "text/plain")
+    String mapperShortTest(){
+        var results = competitionShortMapper.toDto(competitionRepository.findByLevel1());
+        return QueryResultPrettier.concatenateObjects(results);
+    }
+
+    @GetMapping(value = "mapper-full-test", produces = "text/plain")
+    String mapperFullTest(){
+        var results = competitionRepository.findByLevel1().stream().map(competitionFullMapper::toDto).toList();
         return QueryResultPrettier.concatenateObjects(results);
     }
 

@@ -1,6 +1,7 @@
 package my.example.awards.endpoints;
 
 import lombok.AllArgsConstructor;
+import my.example.awards.endpoints.helper.QueryResultPrettier;
 import my.example.awards.model.Competition;
 import my.example.awards.repo.CompetitionRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+
+import static my.example.awards.endpoints.helper.HtmlHelper.generateHtmlLinks;
 
 @AllArgsConstructor
 @RestController
@@ -19,15 +22,10 @@ public class CompetitionEndpoints {
 
     @GetMapping(value = "/", produces = "text/html")
     String getLinks(){
-        return "Try this URL:</br></br>" +
-                "<a href=\"by-num-level/1\">by-num-level/1</a></br>" +
-                "<a href=\"by-num-level/2\">by-num-level/2</a></br>" +
-                "<a href=\"by-num-level/3\">by-num-level/3</a></br>" +
-                "<a href=\"by-num-level/4\">by-num-level/4</a></br>" +
-                "<a href=\"by-num-level/5\">by-num-level/5</a></br>" +
-                "<a href=\"by-num-level/6\">by-num-level/6</a></br>" +
-                "<a href=\"by-num-level/7\">by-num-level/7</a></br>" +
-                "<a href=\"by-num-level/8\">by-num-level/8</a></br>";
+        return generateHtmlLinks("comp",
+                "by-num-level/1", "by-num-level/2", "by-num-level/3",
+                "by-num-level/4", "by-num-level/5", "by-num-level/6",
+                "by-num-level/7", "by-num-level/8");
     }
 
     @GetMapping(value = "by-num-level/{lev}", produces = "text/plain")

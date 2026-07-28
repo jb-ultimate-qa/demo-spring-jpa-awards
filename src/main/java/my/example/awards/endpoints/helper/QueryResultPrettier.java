@@ -1,4 +1,4 @@
-package my.example.awards.endpoints;
+package my.example.awards.endpoints.helper;
 
 import java.util.List;
 

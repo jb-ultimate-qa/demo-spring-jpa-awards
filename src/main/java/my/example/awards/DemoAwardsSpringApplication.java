@@ -39,7 +39,7 @@ public class DemoAwardsSpringApplication implements CommandLineRunner {
 
     public static void printURLs(){
         System.out.println("""
-                Go to http://localhost:8080/hello/
+                Go to http://localhost:8080/hello
                 http://localhost:8080/awards/
                 http://localhost:8080/comp/
                 http://localhost:8080/schools/all

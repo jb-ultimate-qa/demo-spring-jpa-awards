@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-// todo sql types show one point less than actual in db
 public interface TimestampDefaultPrecisionEntityRepository extends JpaRepository<TimestampDefaultPrecisionEntity, Long> {
     // Date only
 //    @Query("select t from TimestampDefaultPrecisionEntity t where t.sqlDate = {1970-07-17}")
@@ -19,7 +18,7 @@ public interface TimestampDefaultPrecisionEntityRepository extends JpaRepository
     List<TimestampDefaultPrecisionEntity> findByLocalDateJ();
 
     // Time Only
-//    @Query("select t from TimestampDefaultPrecisionEntity t where t.sqlTime = {02:26:06}") // todo ok but wrong value
+//    @Query("select t from TimestampDefaultPrecisionEntity t where t.sqlTime = {02:26:06}")
 //    List<TimestampDefaultPrecisionEntity> findBySqlTime();    //[Outdated]
 
     @Query("select t from TimestampDefaultPrecisionEntity t where t.localTime = {t '02:26:06'}") // todo JPQL doesn't work

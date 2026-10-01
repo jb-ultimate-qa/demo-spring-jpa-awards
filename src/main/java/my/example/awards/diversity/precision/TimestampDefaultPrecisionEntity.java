@@ -1,9 +1,6 @@
 package my.example.awards.diversity.precision;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -12,6 +9,19 @@ import java.time.*;
 
 @Entity
 @Table(name = "precision_time_def")
+@NamedQueries({
+        @NamedQuery(name = "Time_test1", query = "select t from TimestampDefaultPrecisionEntity t where sqlDate=:date"),    // ok
+        @NamedQuery(name = "Time_test2", query = "select t from TimestampDefaultPrecisionEntity t where localDate=:date"),  // ok
+        @NamedQuery(name = "Time_test3", query = "select t from TimestampDefaultPrecisionEntity t where sqlTime=:time"),    // ok
+        @NamedQuery(name = "Time_test4", query = "select t from TimestampDefaultPrecisionEntity t where localTime=:time"),  // ok
+        @NamedQuery(name = "Time_test5", query = "select t from TimestampDefaultPrecisionEntity t where offsetTime=:time"), // doesn't work, org.hibernate.query.QueryArgumentException: Argument to query parameter has an incompatible type (java.lang.String is not assignable to java.time.OffsetTime)
+        @NamedQuery(name = "Time_test6", query = "select t from TimestampDefaultPrecisionEntity t where javaDate>:timestamp"),     // works with 1970-07-17T08:17:17, doesn't work with 1970-07-17 08:17:17 java.time.format.DateTimeParseException: Text '1970-07-17 08:17:17.123000' could not be parsed, unparsed text found at index 10
+        @NamedQuery(name = "Time_test7", query = "select t from TimestampDefaultPrecisionEntity t where sqlTimestamp>:timestamp"), // the same
+        @NamedQuery(name = "Time_test8", query = "select t from TimestampDefaultPrecisionEntity t where dtInstant>:timestamp"),      // works with 1970-07-17T08:17:17Z
+        @NamedQuery(name = "Time_test9", query = "select t from TimestampDefaultPrecisionEntity t where localDateTime>:timestamp"),  // works with 1970-07-17T08:17:17Z
+        @NamedQuery(name = "Time_test10", query = "select t from TimestampDefaultPrecisionEntity t where offsetDateTime>:timestamp"),// works with 1970-07-17T08:17:17+01 or 1970-07-17T08:17:17+01:00
+        @NamedQuery(name = "Time_test11", query = "select t from TimestampDefaultPrecisionEntity t where zonedDateTime>:timestamp"), // works with 1970-07-17T08:17:17+01 or 1970-07-17T08:17:17+01:00
+})
 public class TimestampDefaultPrecisionEntity {
     @Id
     @Column(nullable = false)

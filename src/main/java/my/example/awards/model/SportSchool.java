@@ -7,6 +7,10 @@ import java.util.*;
 
 @Entity
 @Table(name = "aw_sport_school")
+@NamedQueries(
+        @NamedQuery(name = "SportSchoolQuery_2",
+                query = "select distinct ss from SportSchool ss join fetch ss.ratingSet rating where rating in :set")
+)
 public class SportSchool {
     @Id
     @Column(name = "id", nullable = false)

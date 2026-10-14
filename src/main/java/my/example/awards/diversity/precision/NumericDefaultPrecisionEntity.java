@@ -15,21 +15,21 @@ public class NumericDefaultPrecisionEntity {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(precision = 10, scale = 1)
+    @Column
     private BigDecimal bigDecimal;
 
-    @Column(precision = 10, scale = 1)
+    @Column
     private BigInteger bigInteger;
 
-    @Column(precision = 10)
+    @Column
     private Float floatWrap;
 
-    @Column(precision = 10)
+    @Column
     private float floatPrimitive;
 
-    @Column(precision = 10)
+    @Column
     private Double doubleWrap;
 
-    @Column(precision = 10)
+    @Column
     private double doublePrimitive;
 }

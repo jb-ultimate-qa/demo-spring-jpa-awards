@@ -1,6 +1,7 @@
 package my.example.awards;
 
 import my.example.awards.diversity.precision.bean.TimestampService;
+import my.example.awards.repo.TestingService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,11 +23,18 @@ public class DemoAwardsSpringApplication {
                 http://localhost:8080/schools/all""");
     }
 
+//    @Bean
+//    CommandLineRunner runner(TimestampService timestampService) {
+//        return args -> {
+//            timestampService.createTestData();
+//            timestampService.checkHqlSyntax();
+//        };
+//    }
+
     @Bean
-    CommandLineRunner runner(TimestampService timestampService) {
+    CommandLineRunner runner(TestingService service) {
         return args -> {
-            timestampService.createTestData();
-            timestampService.checkHqlSyntax();
+            service.testQuery();
         };
     }
 
